@@ -1,10 +1,17 @@
 import Card from "../components/Card";
+import Image from "next/image";
+import about from "../../public/about.png";
+
+import alex from "../../public/alex.png";
+import mary from "../../public/mary.png";
+import aaron from "../../public/Aaron.png";
+import sharon from "../../public/Sharon.png";
 
 export default function About() {
   return (
     <>
-      <div className="w-full bg-slate-300 h-96 my-6 rounded text-white flex justify-center items-center">
-        About Page Background
+      <div className="w-full bg-slate-300 h-96 my-6 rounded text-white flex justify-center items-center overflow-hidden">
+        <Image src={about} />
       </div>
       <div className="mx-12 my-24">
         <h2 className="font-bold text-4xl">Our story</h2>
@@ -29,10 +36,10 @@ export default function About() {
           Meet our friendly neighborhood doctors!
         </h2>
         <div className="flex wrap">
-          <Card drName="John" />
-          <Card drName="Mary" />
-          <Card drName="Alex" />
-          <Card drName="Aaron" />
+          <Card drName="Alex" url={alex} />
+          <Card drName="Mary" url={mary} />
+          <Card drName="Aaron" url={aaron} />
+          <Card drName="Sharon" url={sharon} />
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import location from "../public/location.png";
 import nurse from "../public/home-2.jpg";
 import landing from "../public/landing.png";
+import Link from "next/link";
 export default function Home() {
   return (
     <>
@@ -37,9 +38,11 @@ export default function Home() {
           <h3 className="font-bold text-3xl my-6">
             Already part of the family?
           </h3>
-          <button className="rounded-lg shadow-lg py-2 px-6 text-xl font-semibold bg-indigo-950 text-white w-fit hover:bg-indigo-900">
-            Login
-          </button>
+          <Link href="/login">
+            <button className="rounded-lg shadow-lg py-2 px-6 text-xl font-semibold bg-indigo-950 text-white w-fit hover:bg-indigo-900">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </>
