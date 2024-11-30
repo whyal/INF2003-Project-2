@@ -23,14 +23,6 @@ export default function Home() {
         </p>
       </div>
       <div className="mx-12 my-24 flex justify-center items-center">
-        <h3 className="font-bold text-3xl w-1/2">
-          New to our clinic? Head to our location just outside of Punggol MRT!
-        </h3>
-        <div className="rounded-lg w-[450px] overflow-hidden shadow-lg">
-          <Image alt="Location" src={location} />
-        </div>
-      </div>
-      <div className="mx-12 my-24 flex justify-center items-center">
         <div className="rounded-lg w-[450px] overflow-hidden shadow-lg">
           <Image alt="Location" src={nurse} />
         </div>
@@ -43,6 +35,14 @@ export default function Home() {
               Login
             </button>
           </Link>
+        </div>
+      </div>
+      <div className="mx-12 my-24 flex justify-center items-center">
+        <h3 className="font-bold text-3xl w-1/2">
+          New to our clinic? Head to our location just outside of Punggol MRT!
+        </h3>
+        <div className="rounded-lg w-[450px] overflow-hidden shadow-lg">
+          <Image alt="Location" src={location} />
         </div>
       </div>
     </>

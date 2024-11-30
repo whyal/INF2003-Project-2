@@ -3,37 +3,35 @@ import { useEffect, useState } from "react";
 
 function DashboardPatientsPage() {
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
   const [appointments, setAppointments] = useState([]);
 
-  useEffect(() => {
-    let patientData = JSON.parse(window.sessionStorage.getItem("data"));
-    setName(patientData.FIRST_NAME);
-    setId(patientData.PATIENT_ID);
+  // useEffect(() => {
+  //   let doctorData = JSON.parse(window.sessionStorage.getItem("data"));
+  //   setName(doctorData.FIRST_NAME);
 
-    const data = async () => {
-      try {
-        const res = await fetch("/api/appointments/patients", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: patientData.PATIENT_ID }),
-        });
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const result = await res.json();
-        setAppointments(result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    data();
-  }, []);
+  //   const data = async () => {
+  //     try {
+  //       const res = await fetch("/api/appointments/doctors", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ id: doctorData.DOCTOR_ID }),
+  //       });
+  //       if (!res.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const result = await res.json();
+  //       setAppointments(result);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   data();
+  // }, []);
 
   return (
     <>
-      <div className="bg-white p-6 w-full max-w-sm">
-        <h2 className="text-2xl font-bold">Welcome {name && name}</h2>
+      {/* <div className="bg-white p-6 w-full max-w-sm">
+        <h2 className="text-2xl font-bold">Welcome Dr. {name && name}</h2>
         <h3>Your Appointments</h3>
         <table className="w-100">
           <thead>
@@ -54,7 +52,8 @@ function DashboardPatientsPage() {
               ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
+      <h1>Welcome, Doctor!</h1>
     </>
   );
 }

@@ -11,70 +11,70 @@ function DashboardPatientsPage() {
   const [appointment_time, setAppointmentTime] = useState("");
   const [reason, setReason] = useState("");
 
-  useEffect(() => {
-    let adminData = JSON.parse(window.sessionStorage.getItem("data"));
-    setName(adminData.FIRST_NAME);
+  // useEffect(() => {
+  //   let adminData = JSON.parse(window.sessionStorage.getItem("data"));
+  //   setName(adminData.FIRST_NAME);
 
-    const fetchAppt = async () => {
-      try {
-        const res = await fetch("/api/appointments/admins", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        const result = await res.json();
-        console.log(res);
-        setAppointments(result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAppt();
-  }, []);
+  //   const fetchAppt = async () => {
+  //     try {
+  //       const res = await fetch("/api/appointments/admins", {
+  //         method: "GET",
+  //         headers: { "Content-Type": "application/json" },
+  //       });
+  //       const result = await res.json();
+  //       console.log(res);
+  //       setAppointments(result);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchAppt();
+  // }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await fetch("/api/appointments/admins", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "createAppointment",
-          patient_id,
-          doctor_id,
-          appointment_time,
-          reason,
-        }),
-      });
+  //   try {
+  //     const response = await fetch("/api/appointments/admins", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         action: "createAppointment",
+  //         patient_id,
+  //         doctor_id,
+  //         appointment_time,
+  //         reason,
+  //       }),
+  //     });
 
-      if (response.ok) {
-        console.log("Appointment created successfully");
-      } else {
-        console.error("Error creating appointment");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handleDelete = async (e) => {
-    const appointmentId = e.target.getAttribute("data-id");
-    setSelectedAppointmentId(appointmentId);
+  //     if (response.ok) {
+  //       console.log("Appointment created successfully");
+  //     } else {
+  //       console.error("Error creating appointment");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // const handleDelete = async (e) => {
+  //   const appointmentId = e.target.getAttribute("data-id");
+  //   setSelectedAppointmentId(appointmentId);
 
-    await fetch("/api/appointments/admins", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "deleteAppointment",
-        selectedAppointmentId,
-      }),
-    });
-  };
+  //   await fetch("/api/appointments/admins", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       action: "deleteAppointment",
+  //       selectedAppointmentId,
+  //     }),
+  //   });
+  // };
 
   return (
     <>
-      <div className="bg-white p-6 w-full max-w-sm">
+      {/* <div className="bg-white p-6 w-full max-w-sm">
         <h2 className="text-2xl font-bold">Welcome {name && name}</h2>
         <h3>All Appointments</h3>
         <table className="w-100">
@@ -164,7 +164,8 @@ function DashboardPatientsPage() {
           </button>{" "}
            
         </form>
-      </div>
+      </div> */}
+      <h1>Welcome, Admin!</h1>
     </>
   );
 }

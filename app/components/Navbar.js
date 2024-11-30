@@ -1,13 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
-const Navbar = () => {
+const Navbar = (user = false) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  // Check cookies on component load
+  useEffect(() => {
+    const userCookie = Cookies.get("token"); // Replace with your cookie name
+    setIsLoggedIn(!!userCookie); // Set logged-in state based on cookie existence
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        setIsLoggedIn(false); // Update state
+        console.log("Logged out successfully");
+        // Redirect to the login page
+        router.push("/login");
+      } else {
+        console.error("Failed to log out");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   return (
@@ -78,12 +108,23 @@ const Navbar = () => {
                 >
                   About
                 </Link>
-                <Link
-                  href="/login"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Login
-                </Link>
+
+                {isLoggedIn ? (
+                  <Link
+                    href="/login"
+                    onClick={handleLogout}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Log out
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -106,12 +147,23 @@ const Navbar = () => {
             >
               About
             </Link>
-            <Link
-              href="/login"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Login
-            </Link>
+
+            {isLoggedIn ? (
+              <Link
+                href="/login"
+                onClick={handleLogout}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Log out
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       )}
