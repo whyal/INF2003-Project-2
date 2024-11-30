@@ -28,6 +28,33 @@ export default function DoctorDashboardClient({ email }) {
     fetchUser();
   }, []);
 
+  const handleDelete = async (e) => {
+    const appointmentId = e.target.getAttribute("data-id");
+
+    try {
+      const response = await fetch("/api/appointments/admins", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "Delete Appointment",
+          appointmentId: appointmentId,
+        }),
+      });
+      if (response.ok) {
+        console.log("Appointment deleted successfully");
+        setAppointments((prevAppointments) =>
+          prevAppointments.filter(
+            (appointment) => appointment._id !== appointmentId
+          )
+        );
+      } else {
+        console.error("Error deleting appointment");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold my-12">Welcome back, Doctor!</h2>
@@ -99,7 +126,11 @@ export default function DoctorDashboardClient({ email }) {
                       {appt._id}
                     </td>
                     <td className="flex justify-between py-2 px-4 border-b text-gray-700">
-                      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                      <button
+                        onClick={handleDelete}
+                        data-id={appt._id}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                      >
                         Done
                       </button>
                     </td>

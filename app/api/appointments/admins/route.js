@@ -56,7 +56,6 @@ export async function POST(req) {
     }
   } else if (action === "Delete Appointment") {
     const { appointmentId } = data;
-    console.log(appointmentId);
 
     if (!appointmentId) {
       return new Response(JSON.stringify({ error: "Missing appointment_id" }), {
@@ -70,7 +69,7 @@ export async function POST(req) {
       const result = await db
         .collection("appointments")
         .deleteOne({ _id: new ObjectId(appointmentId) });
-      console.log(appointmentId);
+
       return new Response(JSON.stringify(result), {
         status: 200,
       });

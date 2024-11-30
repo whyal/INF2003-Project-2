@@ -131,7 +131,6 @@ function DashboardPatientsPage() {
   // Open the dialog
   const handleOpenDialog = (appointment) => {
     setSelectedAppointment(appointment);
-    //setUpdatedAppointment(appointment); // Pre-fill with the existing name
     setIsDialogOpen(true);
   };
 
@@ -139,7 +138,6 @@ function DashboardPatientsPage() {
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
     setSelectedAppointment(null);
-    //setUpdatedReason("");
   };
 
   return (
@@ -294,11 +292,14 @@ function DashboardPatientsPage() {
       {/* Update Dialog */}
       {isDialogOpen && (
         <div className="fixed w-full h-full flex flex-col items-center justify-center top-0 left-0 bg-[#00000080]">
-          <div className="bg-white p-[20px] w-[300px] rounded-lg">
-            <h2>Update Appointment</h2>
+          <div className="bg-white p-[20px] w-fit rounded-lg">
+            <h2 className="text-center font-bold text-4xl mb-8">
+              Update Appointment
+            </h2>
             <label>
               Patient ID:
               <input
+                className="w-full border rounded-md px-4 py-2"
                 type="text"
                 name="patient_id"
                 value={selectedAppointment.patient_id}
@@ -308,6 +309,7 @@ function DashboardPatientsPage() {
             <label>
               Doctor ID:
               <input
+                className="w-full border rounded-md px-4 py-2"
                 type="text"
                 name="doctor_id"
                 value={selectedAppointment.doctor_id}
@@ -317,7 +319,8 @@ function DashboardPatientsPage() {
             <label>
               Appointment Time:
               <input
-                type="text"
+                className="w-full border rounded-md px-4 py-2"
+                type="datetime-local"
                 name="appointment_time"
                 value={selectedAppointment.appointment_time}
                 onChange={handleChange}
@@ -327,14 +330,15 @@ function DashboardPatientsPage() {
               Reason:
               <input
                 type="text"
+                className="w-full border rounded-md px-4 py-2"
                 name="reason"
                 value={selectedAppointment.reason}
                 onChange={handleChange}
               />
             </label>
-            <div>
+            <div className="mt-4">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
                 onClick={handleUpdate}
               >
                 Save
