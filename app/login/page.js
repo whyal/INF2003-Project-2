@@ -31,6 +31,7 @@ export default function Login() {
         // Store JWT token in cookies
         Cookies.set("token", data.token);
         // Redirect to the dashboard
+        Cookies.set("email", user.email);
         router.push("/dashboard");
       } else {
         setError(data.error || "Failed to login");

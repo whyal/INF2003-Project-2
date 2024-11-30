@@ -90,7 +90,7 @@ const Navbar = (user = false) => {
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-white font-bold text-lg">
+              <Link href="/" className="text-white font-bold text-lg px-3 py-2">
                 iClinic
               </Link>
             </div>
@@ -113,7 +113,7 @@ const Navbar = (user = false) => {
                   <Link
                     href="/login"
                     onClick={handleLogout}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Log out
                   </Link>
