@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-export default function DoctorDashboardClient({ email }) {
+export default function PatientDashboardClient({ email }) {
   const [appointments, setAppointments] = useState(null);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("/api/appointments/doctors", {
+        const response = await fetch("/api/appointments/patients", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -30,7 +30,7 @@ export default function DoctorDashboardClient({ email }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold my-12">Welcome back, Doctor!</h2>
+      <h2 className="text-2xl font-bold my-12">Welcome back, Patient!</h2>
       <div className="w-full">
         <div className="bg-white p-6 w-full">
           <h3 className="text-center font-bold text-4xl mb-8">
@@ -69,10 +69,6 @@ export default function DoctorDashboardClient({ email }) {
                 >
                   Appointment ID
                 </th>
-                <th
-                  className="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm border-b"
-                  scope="col"
-                ></th>
               </tr>
             </thead>
             <tbody>
@@ -97,11 +93,6 @@ export default function DoctorDashboardClient({ email }) {
                     </td>
                     <td className="py-2 px-4 border-b text-gray-700">
                       {appt._id}
-                    </td>
-                    <td className="flex justify-between py-2 px-4 border-b text-gray-700">
-                      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                        Done
-                      </button>
                     </td>
                   </tr>
                 ))}

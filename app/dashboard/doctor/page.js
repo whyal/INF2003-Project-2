@@ -1,5 +1,4 @@
-//import { useEffect, useState } from "react";
-import DashboardClient from "@/app/components/DoctorDashboardClient";
+import DoctorDashboardClient from "@/app/components/DoctorDashboardClient";
 import { cookies } from "next/headers";
 
 function DashboardPatientsPage() {
@@ -10,7 +9,7 @@ function DashboardPatientsPage() {
     return <div>You must be logged in to access this page.</div>;
   }
 
-  return <DashboardClient email={email} />;
+  return <DoctorDashboardClient email={email} />;
 }
 
 export default DashboardPatientsPage;

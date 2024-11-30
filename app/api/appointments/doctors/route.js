@@ -1,5 +1,4 @@
 import clientPromise from "@/lib/db";
-import { ObjectId } from "mongodb";
 
 export async function POST(req, res) {
   if (req.method === "POST") {
