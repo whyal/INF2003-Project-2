@@ -1,4 +1,5 @@
 "use client";
+import { data } from "autoprefixer";
 import { useEffect, useState } from "react";
 
 function DashboardPatientsPage() {
@@ -11,7 +12,7 @@ function DashboardPatientsPage() {
   const [reason, setReason] = useState("");
 
   const [selectedAppointment, setSelectedAppointment] = useState(null); // Data for the selected appointment
-  const [updatedReason, setUpdatedReason] = useState(""); // Updated name for the appointment
+  const [updatedAppointment, setUpdatedAppointment] = useState(null); // Updated name for the appointment
   useEffect(() => {
     const fetchAppt = async () => {
       try {
@@ -98,8 +99,7 @@ function DashboardPatientsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           action: "Update Appointment",
-          appointmentId: selectedAppointment._id,
-          updatedData: { name: updatedName },
+          updatedData: selectedAppointment,
         }),
       });
 
@@ -108,7 +108,7 @@ function DashboardPatientsPage() {
         setAppointments((prevAppointments) =>
           prevAppointments.map((appointment) =>
             appointment._id === selectedAppointment._id
-              ? { ...appointment, name: updatedName }
+              ? selectedAppointment
               : appointment
           )
         );
@@ -122,10 +122,17 @@ function DashboardPatientsPage() {
     }
   };
 
+  const handleChange = (e) => {
+    setSelectedAppointment({
+      ...selectedAppointment,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   // Open the dialog
   const handleOpenDialog = (appointment) => {
     setSelectedAppointment(appointment);
-    setUpdatedReason(appointment.reason); // Pre-fill with the existing name
+    //setUpdatedAppointment(appointment); // Pre-fill with the existing name
     setIsDialogOpen(true);
   };
 
@@ -133,7 +140,7 @@ function DashboardPatientsPage() {
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
     setSelectedAppointment(null);
-    setUpdatedReason("");
+    //setUpdatedReason("");
   };
 
   return (
@@ -183,15 +190,43 @@ function DashboardPatientsPage() {
       </div>
       {/* Update Dialog */}
       {isDialogOpen && (
-        <div className="dialog-overlay">
-          <div className="dialog">
+        <div className="fixed w-full h-full flex flex-col items-center justify-center top-0 left-0 bg-[#00000080]">
+          <div className="bg-white p-[20px] w-[300px] rounded-lg">
             <h2>Update Appointment</h2>
+            <label>
+              Patient ID:
+              <input
+                type="text"
+                name="patient_id"
+                value={selectedAppointment.patient_id}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Doctor ID:
+              <input
+                type="text"
+                name="doctor_id"
+                value={selectedAppointment.doctor_id}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Appointment Time:
+              <input
+                type="text"
+                name="appointment_time"
+                value={selectedAppointment.appointment_time}
+                onChange={handleChange}
+              />
+            </label>
             <label>
               Reason:
               <input
                 type="text"
-                value={updatedReason}
-                onChange={(e) => setUpdatedReason(e.target.value)}
+                name="reason"
+                value={selectedAppointment.reason}
+                onChange={handleChange}
               />
             </label>
             <div>

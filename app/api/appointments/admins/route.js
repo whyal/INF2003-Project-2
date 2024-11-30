@@ -81,5 +81,28 @@ export async function POST(req) {
         { status: 500 }
       );
     }
+  } else if (action == "Update Appointment") {
+    try {
+      const { _id, ...updatedData } = data.updatedData;
+      console.log("Data: ", data);
+      console.log(updatedData);
+      const client = await clientPromise;
+      const db = client.db("iclinicdb"); // Replace with your database name
+
+      const result = await db.collection("appointments").updateOne(
+        { _id: new ObjectId(_id) }, // Query by _id
+        { $set: updatedData } // Update fields
+      );
+
+      return new Response(JSON.stringify(result), {
+        status: 200,
+      });
+    } catch (error) {
+      console.error("Database error:", error);
+      return new Response(
+        JSON.stringify({ error: "Failed to update appointment" }),
+        { status: 500 }
+      );
+    }
   }
 }
